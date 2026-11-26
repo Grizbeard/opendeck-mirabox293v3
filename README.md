@@ -1,7 +1,7 @@
 # OpenDeck Mirabox 293 V3 Plugin
 
 An unofficial [OpenDeck](https://github.com/nekename/OpenDeck) device support plugin for
-the **MiraBox Stream Dock 293 V3** (USB `6603:1006`).
+the **MiraBox Stream Dock 293 V3** (USB `6603:1006` or `6603:1005`).
 
 This device is closely related to the Ajazz AKP153 / Mirabox HSV293S family, but it is
 not compatible with the plugin that serves them. It reports an unlisted product ID, has a
@@ -11,10 +11,10 @@ of that.
 
 ## Is this the right plugin for my device?
 
-Only if your device reports **`6603:1006`**. Other members of the family — including other
-293-series revisions — are supported by
-[opendeck-akp153](https://github.com/4ndv/opendeck-akp153), which covers `6603:1014`,
-`6603:1005` and fifteen other devices. Check yours first:
+Only if your device reports **`6603:1006`** or **`6603:1005`**. Other members of the
+family — including other 293-series revisions — are supported by
+[opendeck-akp153](https://github.com/4ndv/opendeck-akp153), which covers `6603:1014` and
+fifteen other devices. Check yours first:
 
 **Windows** (PowerShell):
 
@@ -28,7 +28,12 @@ Get-PnpDevice -PresentOnly | Where-Object { $_.InstanceId -like "*VID_6603*" } |
 lsusb | grep -i 6603
 ```
 
-If you see a different product ID, use the upstream plugin. If you see `1006`, read on.
+If you see a different product ID, use the upstream plugin. If you see `1006` or `1005`,
+read on.
+
+opendeck-akp153 also lists `6603:1005`, but a 293 V3 with that ID behaves exactly like the
+`1006` one: on that plugin it reboots every ~35 seconds and images land on the wrong keys.
+Don't install both plugins at once, or they will fight over the device.
 
 ## Requirements
 
@@ -62,8 +67,8 @@ they are: OpenDeck resolves both from `manifest.json`.
 
 </details>
 
-Only the Windows build has been tested on hardware. The Linux and macOS binaries are
-built by CI and are expected to work, but are unverified.
+The Windows build has been tested on a `1006` unit and the Linux build on a `1005` unit.
+The macOS binary is built by CI and is expected to work, but is unverified.
 
 ## Building
 
@@ -154,7 +159,7 @@ upstream one recognises, the sequence that worked here was:
 
 ## Troubleshooting
 
-**The device is not detected.** Confirm the product ID is `1006` (see above). On Linux,
+**The device is not detected.** Confirm the product ID is `1006` or `1005` (see above). On Linux,
 confirm the udev rules are installed. The plugin logs every candidate it finds to
 `%LOCALAPPDATA%\opendeck\logs\plugins\` on Windows, or
 `~/.local/share/opendeck/logs/plugins/` on Linux.
