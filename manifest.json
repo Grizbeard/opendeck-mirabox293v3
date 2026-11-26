@@ -1,6 +1,6 @@
 {
   "Name": "Mirabox 293 V3",
-  "Description": "Device support plugin for the Mirabox Stream Dock 293 V3 (6603:1006)",
+  "Description": "Device support plugin for the Mirabox Stream Dock 293 V3 (6603:1006, 6603:1005)",
   "Author": "Grizbeard",
   "Version": "0.1.0",
   "PluginUUID": "com.github.grizbeard.opendeck-mirabox293v3",

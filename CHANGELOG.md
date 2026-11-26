@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Added `6603:1005`, another product ID used by the 293 V3. It needs the same handling as
+  `1006` (grid, image order, keepalive), so it maps to the same device kind.
+
 ## 0.1.0
 
 Initial release. Forked from [opendeck-akp153](https://github.com/4ndv/opendeck-akp153)

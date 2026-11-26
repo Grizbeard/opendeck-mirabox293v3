@@ -20,10 +20,15 @@ pub enum Kind {
 
 pub const MIRABOX_VID: u16 = 0x6603;
 pub const HSV293V3_PID: u16 = 0x1006;
+/// Same hardware, shipped under a different product ID.
+pub const HSV293V3_ALT_PID: u16 = 0x1005;
 
 pub const HSV293V3_QUERY: DeviceQuery = DeviceQuery::new(65440, 1, MIRABOX_VID, HSV293V3_PID);
 
-pub const QUERIES: [DeviceQuery; 1] = [HSV293V3_QUERY];
+pub const HSV293V3_ALT_QUERY: DeviceQuery =
+    DeviceQuery::new(65440, 1, MIRABOX_VID, HSV293V3_ALT_PID);
+
+pub const QUERIES: [DeviceQuery; 2] = [HSV293V3_QUERY, HSV293V3_ALT_QUERY];
 
 /// Every key on this device has the same 112x112 screen, so the format never varies.
 ///
@@ -43,7 +48,7 @@ impl Kind {
     pub fn from_vid_pid(vid: u16, pid: u16) -> Option<Self> {
         match vid {
             MIRABOX_VID => match pid {
-                HSV293V3_PID => Some(Kind::HSV293V3),
+                HSV293V3_PID | HSV293V3_ALT_PID => Some(Kind::HSV293V3),
                 _ => None,
             },
 
